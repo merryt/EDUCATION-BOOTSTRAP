@@ -1,0 +1,10 @@
+php_flag file_uploads On
+php_value upload_max_filesize 1024M
+php_value post_max_size 1024M
+Options -Indexes
+<IfModule mod_rewrite.c>
+   RewriteEngine on
+   RewriteRule    ^uploads/(.*)$ uploads/$1 [L]
+   RewriteRule    ^$ app/webroot/    [L]
+   RewriteRule    (.*) app/webroot/$1 [L]
+</IfModule>
