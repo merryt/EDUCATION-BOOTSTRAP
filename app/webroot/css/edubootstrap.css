@@ -72,7 +72,6 @@ body{
 	border-color: #070F33;
 }
 
-
 .wrap2 a{
 	color: #ffffff;
 }
@@ -93,6 +92,13 @@ body{
 	.loginBox img{
 		padding: 10px 0 0 0;
 		float: right;
+	}
+
+#search{
+	margin: -50px 0 0 300px;	
+}
+	.search-query{
+		width: 300px;
 	}
 
 #logo{
