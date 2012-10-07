@@ -1,6 +1,6 @@
 <body>
 <div class="wrap">
-	<?php echo $this->Html->link($this->Html->image('logo.png',array('id'=>'logo')), '#', array('escape'=>false));?>
+	<?php echo $this->Html->link($this->Html->image('logo.png',array('id'=>'logo')), Router::url('/'), array('escape'=>false));?>
 	<div class="loginBox">
 		<a href="#">SIGN-IN</a> - <a href="#">CREATE ACCOUNT</a>
 		<br />
