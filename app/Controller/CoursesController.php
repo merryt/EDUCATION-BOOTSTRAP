@@ -8,7 +8,7 @@ App::uses('AppController', 'Controller');
 class CoursesController extends AppController {
 
 	public $paginate = array(
-		'limit' => 2					// Default paging info
+		'limit' => 4					// Default paging info
 		,'paramType' => 'querystring'
 	);
 
@@ -20,14 +20,15 @@ class CoursesController extends AppController {
 	public function search() {
 		
 		$this->set('title_for_layout','Search');
+
 		$conditions = array();
 		if(isset($this->request->query['keywords'])) {
 			$conditions = array(
-				'OR' => array(
-					"Course.title like" => $this->request->query['keywords']
-					,"Course.description like" => $this->request->query['keywords']
+				array('OR' => array(
+					 "Course.title LIKE" => '%'.$this->request->query['keywords'].'%'
+					,"Course.description LIKE" => '%'.$this->request->query['keywords'].'%'
 				)
-			);			
+			));			
 		}
 	
 		if(isset($this->request->query['me'])) {
@@ -35,12 +36,11 @@ class CoursesController extends AppController {
 		}
 				
 		$query = array(
-			'fields' => array('Course.*','User.*','Vendor.*','Level.*')
-			,'modelpaths' => array('User','Vendor','Level')
-			,'conditions' => $conditions
+			 'conditions' => $conditions
+			,'order' => 'Course.id'
 		);
-		$tc = $this->Course->find('all',$query);
-		$q = $this->getLastQuery($this->Course);
+		
+		// Real query
 		$this->paginate = array_merge($this->paginate,$query);
 		$courses = $this->paginate();
 		$this->set('courses', $courses);
