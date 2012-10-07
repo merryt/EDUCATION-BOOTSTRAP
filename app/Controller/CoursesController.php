@@ -24,8 +24,8 @@ class CoursesController extends AppController {
 		if(isset($this->request->query['keywords'])) {
 			$conditions = array(
 				'OR' => array(
-				"Course.title" => $this->request->query['keywords']
-				,"Course.description" => $this->request->query['keywords']
+				"Course.title like" => $this->request->query['keywords']
+				,"Course.description like" => $this->request->query['keywords']
 			));			
 		}
 	
