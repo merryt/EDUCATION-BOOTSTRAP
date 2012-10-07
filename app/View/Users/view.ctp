@@ -1,93 +1,43 @@
-<div class="users view">
-<h2><?php  echo __('User'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Username'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['username']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Firstname'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['firstname']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Lastname'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['lastname']); ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit User'), array('action' => 'edit', $user['User']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Courses'), array('controller' => 'courses', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Course'), array('controller' => 'courses', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Courses'); ?></h3>
-	<?php if (!empty($user['Course'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Title'); ?></th>
-		<th><?php echo __('Description'); ?></th>
-		<th><?php echo __('Vendor Id'); ?></th>
-		<th><?php echo __('Cost'); ?></th>
-		<th><?php echo __('Duration'); ?></th>
-		<th><?php echo __('Level Id'); ?></th>
-		<th><?php echo __('Rating'); ?></th>
-		<th><?php echo __('Author'); ?></th>
-		<th><?php echo __('Likes'); ?></th>
-		<th><?php echo __('Facilitation Id'); ?></th>
-		<th><?php echo __('Includes'); ?></th>
-		<th><?php echo __('Released'); ?></th>
-		<th><?php echo __('Courseurl'); ?></th>
-		<th><?php echo __('Imageurl'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($user['Course'] as $course): ?>
-		<tr>
-			<td><?php echo $course['id']; ?></td>
-			<td><?php echo $course['title']; ?></td>
-			<td><?php echo $course['description']; ?></td>
-			<td><?php echo $course['vendor_id']; ?></td>
-			<td><?php echo $course['cost']; ?></td>
-			<td><?php echo $course['duration']; ?></td>
-			<td><?php echo $course['level_id']; ?></td>
-			<td><?php echo $course['rating']; ?></td>
-			<td><?php echo $course['author']; ?></td>
-			<td><?php echo $course['likes']; ?></td>
-			<td><?php echo $course['facilitation_id']; ?></td>
-			<td><?php echo $course['includes']; ?></td>
-			<td><?php echo $course['released']; ?></td>
-			<td><?php echo $course['courseurl']; ?></td>
-			<td><?php echo $course['imageurl']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'courses', 'action' => 'view', $course['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'courses', 'action' => 'edit', $course['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'courses', 'action' => 'delete', $course['id']), null, __('Are you sure you want to delete # %s?', $course['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Course'), array('controller' => 'courses', 'action' => 'add')); ?> </li>
-		</ul>
+<body>
+<div class="wrap">
+	<?php echo $this->Html->link($this->Html->image('logo.png',array('id'=>'logo')), Router::url('/'), array('escape'=>false));?>
+	<div class="loginBox">
+		<div id="fb-root"></div>
+		<script>
+			window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '289332017837387', // App ID
+				channelUrl : 'educationbootstrap.com/fbchannel', // Channel File
+				status     : true, // check login status
+				cookie     : true, // enable cookies to allow the server to access the session
+				xfbml      : true  // parse XFBML
+			});
+			};
+			// Load the SDK Asynchronously
+			(function(d){
+			var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement('script'); js.id = id; js.async = true;
+			js.src = "//connect.facebook.net/en_US/all.js";
+			ref.parentNode.insertBefore(js, ref);
+			}(document));
+		</script>
+			<div class="fb-login-button">Login with Facebook</div>
+			<br />
+			<?php echo $this->Html->link($this->Html->image('browse.png'), array('action' => 'search'),array('escape'=>false));?>
 	</div>
+	<div style="margin: 0 0 0 20px;">
+	<h2>Welcome to your courses Gregg.</h1>
+	<?php echo $this->Html->link($this->Html->image('GoodJob.png',array('id'=>'pic2')), Router::url('/'), array('escape'=>false));?>
+	<h4>View your enrolled classes</h4>
+	</div>
+	
+	<?php echo $this->Html->link($this->Html->image('classes.png',array('id'=>'pic')), Router::url('/'), array('escape'=>false));?>
 </div>
+	<div id="footer">
+		<div class="wrap2">
+		<a href="#">browse</a> - <a href="#">search</a> - <a href="#">log-in</a>
+		</div>
+	</div>
+</body>
+</html>
