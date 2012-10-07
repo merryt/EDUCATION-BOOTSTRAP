@@ -17,6 +17,37 @@ class CoursesController extends AppController {
  *
  * @return void
  */
+	public function search() {
+		
+		$this->set('title_for_layout','Search');
+		$conditions = array();
+		if(isset($this->request->query['keywords'])) {
+			$conditions = array(
+				'OR' => array(
+				"Course.title" => $this->request->query['keywords']
+				,"Course.description" => $this->request->query['keywords']
+			));			
+		}
+	
+		if(isset($this->request->query['me'])) {
+			$conditions['User.id'] = 1;
+		}
+				
+		$query = array(
+			'fields' => array('Course.*','User.*','Vendor.*','Level.*')
+			,'modelpaths' => array('User','Vendor','Level')
+			,'conditions' => $conditions
+		);
+		$this->paginate = array_merge($this->paginate,$query);
+		$courses = $this->paginate();
+		$this->set('courses', $courses);
+	}
+
+/**
+ * index method
+ *
+ * @return void
+ */
 	public function index() {
 		$this->Course->recursive = 0;
 		$this->set('courses', $this->paginate());

@@ -7,6 +7,10 @@
 			<br />
 			<?php echo $this->Html->link($this->Html->image('browse.png'), array('action' => 'search'),array('escape'=>false));?>
 		</div>
+		<form action="<?php echo Router::url(array('action'=>'search')); ?>" class="form-search">
+			<input type="text" class="input-medium search-query" name="data[keywords]">
+			<button type="submit" class="btn">Search</button>
+		</form>
 	</div>
 	<div class="gray">
 		<div class="wrap">

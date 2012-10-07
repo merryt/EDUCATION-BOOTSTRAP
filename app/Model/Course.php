@@ -7,6 +7,7 @@ App::uses('AppModel', 'Model');
  * @property Level $Level
  * @property Facilitation $Facilitation
  * @property Subject $Subject
+ * @property User $User
  */
 class Course extends AppModel {
 
@@ -120,6 +121,21 @@ class Course extends AppModel {
 			'joinTable' => 'courses_subjects',
 			'foreignKey' => 'course_id',
 			'associationForeignKey' => 'subject_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		),
+		'User' => array(
+			'className' => 'User',
+			'joinTable' => 'courses_users',
+			'foreignKey' => 'course_id',
+			'associationForeignKey' => 'user_id',
 			'unique' => 'keepExisting',
 			'conditions' => '',
 			'fields' => '',
