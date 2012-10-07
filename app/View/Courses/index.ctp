@@ -19,7 +19,8 @@
 		</td>
 		<td><?php echo h($course['Course']['imageurl']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $course['Course']['id'])); ?>
+			<?php echo $this->Html->link(__('<i class="icon-white icon-play"></i>View'), array('action' => 'view', $course['Course']['id']),array("class"=>"btn btn-success", "escape"=> false )); ?>
+			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $course['Course']['id']),array("class"=>"hide")); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
