@@ -1,153 +1,49 @@
-<!doctype html>
-<html>
-<head>
-<style type="text/css">
-body{
-	background-color: #0F1942;
-}
-.image {
-
-}
-.title {
-	background: #1c2b6d; /* Old browsers */
-	background: -moz-linear-gradient(top, #1c2b6d 0%, #141e4e 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1c2b6d), color-stop(100%,#141e4e)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #1c2b6d 0%,#141e4e 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #1c2b6d 0%,#141e4e 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #1c2b6d 0%,#141e4e 100%); /* IE10+ */
-	background: linear-gradient(to bottom, #1c2b6d 0%,#141e4e 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c2b6d', endColorstr='#141e4e',GradientType=0 ); /* IE6-9 */
-	
-	color: #ffffff;
-	
-	padding: 3px;
-	text-transform: uppercase;
-}
-.description {
- height: 118px;
- padding: 3px;
-}
-.cost {
- padding: 3px;
-}
-.course{
-	background-image: url('../img/courseBox.jpg') ;
-	width: 216px;
-	height: 357px;
-	margin: 10px;
-	padding: 2px 1px 10px 1px;
-	float: left;
-}
-
-.course img {
-	height: 180px;
-	width: 200px;
-
-}
-.wrap{
-	padding: 10px 0 0 0;
-	margin: 0 auto;
-	width: 960px;
-	background-color: #ffffff;
-	border-color: #070F33;
-}
-
-.wrap2{
-	padding: 10px 0 10px 0 ;
-	margin: 0 auto;
-	width: 960px;
-	border-color: #070F33;
-}
-
-.wrap2 a{
-	color: #ffffff;
-}
-
-.loginBox{
-	float: right;
-	margin: 0 10px 30px 0 ;
-}
-	.loginBox img{
-		padding: 10px 0 0 0;
-		float: right;
-	}
-
-#logo{
-	margin: 0 0 0 -12px;
-}
-#centerImg{
-	margin: -12px auto 0 auto;
-	width: 1000px;
-}
-.gray{
-	width: 100%;
-	background-color: #E9E7EA;
-	height: 246px;
-}
-#footer{
-	clear: both;
-	background-color: #AC0009;
-	width: 100%;
-}
-#browse{
-	width: 960px;
-	clear: both;
-}
-</style>
-</head>
-
 <body>
 <div class="wrap">
-	<a href="#"><img id="logo" src="../img/logo.png" /></a>
+	<?php echo $this->Html->link($this->Html->image('logo.png',array('id'=>'logo')), '#', array('escape'=>false));?>
 	<div class="loginBox">
 		<a href="#">SIGN-IN</a> - <a href="#">CREATE ACCOUNT</a>
 		<br />
-		<a><img src="../img/browse.png" /></a>
+		<?php echo $this->Html->link($this->Html->image('browse.png'), array('action' => 'search'),array('escape'=>false));?>
 	</div>
 </div>
-
-<div class="course">
-	<div class="course .image">
-		<?php echo $this->Html->image($course['Course']['imageurl'],array()); ?>
-	</div>
-	<div class="title"><?php echo $this->Html->link($course['Course']['title'],array('action'=>'view',$course['Course']['id'])); ?>
-	</div>
-	<div class="description"><?php echo $this->Text->truncate($course['Course']['description'],200); ?>
-	</div>
-	<div class="cost">Cost: $<?php echo $course['Course']['cost']; ?>
-	</div>
-	<div class="duration"><?php echo $course['Course']['duration']; ?> Minutes
-	</div>
-</div>
-
-<?php echo __('Vendor: ').$course['Vendor']['name'].' ';?>
-<small><?php echo $this->Html->link('More from this Vendor', array('controller' => 'vendors', 'action' => 'view', $course['Vendor']['id'])); ?></small>
-<br/>
-<?php echo $course['Level']['name']. ' ';?>
-<small><?php echo $this->Html->link('More at this level', array('controller' => 'levels', 'action' => 'view', $course['Level']['id'])); ?></small>
-<br/>
-<?php echo __('Facilitation:'); ?>
-<?php echo $course['Facilitation']['name'].' ';?>
-<small><?php echo $this->Html->link('More like this', array('controller' => 'facilitations', 'action' => 'view', $course['Facilitation']['id'])); ?></small>
-<br/>
-<?php echo __('Rating: '); ?>
-<?php echo $this->Html->image('rating/stars-'.($course['Course']['rating'] * 2).'.png'); ?>
-<br/>
-
-<?php echo __('Author: '). h($course['Course']['author']); ?> 
-<br/>
-
-<?php echo $this->Html->link('Click to Enroll', $course['Course']['courseurl']); ?>
-
-	<div class="gray">
-		<div class="wrap">
-		<img id="centerImg" src="../img/centerImg.jpg" />
+<div class="wrap3">
+	<div class="course">
+		<div class="image">
+			<?php echo $this->Html->image($course['Course']['imageurl'],array()); ?>
+		</div>
+		<div class="title"><?php echo $this->Html->link($course['Course']['title'],array('action'=>'view',$course['Course']['id'])); ?>
+		</div>
+		
+		<div class="cost">Cost: $<?php echo $course['Course']['cost']; ?>
+		</div>
+		<div class="duration"><?php echo $course['Course']['duration']; ?> Minutes
 		</div>
 	</div>
-	<div class="wrap">
-
-		<div id="browse"><a href="#">click to browse more...</a></div>
+	<div id="sideC">
+	<?php echo __('Vendor: ').$course['Vendor']['name'].' ';?>
+	<?php echo $this->Html->link('More from this Vendor', array('controller' => 'vendors', 'action' => 'view', $course['Vendor']['id'])); ?></small>
+	<small>
+	<br/>
+	<?php echo $course['Level']['name']. ' ';?>
+	<small><?php echo $this->Html->link('More at this level', array('controller' => 'levels', 'action' => 'view', $course['Level']['id'])); ?></small>
+	<br/>
+	<?php echo __('Facilitation:'); ?>
+	<?php echo $course['Facilitation']['name'].' ';?>
+	<small><?php echo $this->Html->link('More like this', array('controller' => 'facilitations', 'action' => 'view', $course['Facilitation']['id'])); ?></small>
+	<br/>
+	<?php echo $this->Text->truncate($course['Course']['description'],500); ?><br/>
+	<?php echo __('Rating: '); ?>
+	<?php echo $this->Html->image('rating/stars-'.($course['Course']['rating'] * 2).'.png'); ?>
+	<br/>
+	
+	<?php echo __('Author: '). h($course['Course']['author']); ?> 
+	<br/>
+	
+	<?php echo $this->Html->link('Click to Enroll', $course['Course']['courseurl']); ?>
 	</div>
+</div>
+
 	<div id="footer">
 		<div class="wrap2">
 		<a href="#">browse</a> - <a href="#">search</a> - <a href="#">log-in</a>

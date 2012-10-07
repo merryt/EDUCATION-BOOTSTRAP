@@ -24,8 +24,11 @@ body{
 	padding: 3px;
 	text-transform: uppercase;
 }
+.title a {
+	color: #ffffff;
+}
 .description {
- height: 54px;
+ height: 83px;
  padding: 4px;
 }
 .cost, .duration{
@@ -35,6 +38,15 @@ body{
 	background-image: url('../img/courseBox.jpg') ;
 	width: 216px;
 	height: 357px;
+	margin: 10px;
+	padding: 2px 1px 10px 1px;
+	float: left;
+}
+
+.course2{
+	background-image: url('../img/courseBox2.jpg') ;
+	width: 216px;
+	height: 486px;
 	margin: 10px;
 	padding: 2px 1px 10px 1px;
 	float: left;
@@ -60,8 +72,18 @@ body{
 	border-color: #070F33;
 }
 
+
 .wrap2 a{
 	color: #ffffff;
+}
+
+.wrap3{
+	padding: 10px 0 0 0;
+	margin: 0 auto;
+	width: 960px;
+	height: 490px;
+	background-color: #ffffff;
+	border-color: #070F33;
 }
 
 .loginBox{
@@ -99,4 +121,8 @@ body{
 
 #browse span{
 	margin: 4px;
+}
+
+#sideC{
+	width: 800px;
 }

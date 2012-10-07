@@ -18,9 +18,9 @@
 		<div class="image">
 			<?php echo $this->Html->image($course['Course']['imageurl'],array()); ?>
 		</div>
-		<div class="title"><?php echo $this->Html->link($course['Course']['title'],array('action'=>'view',$course['Course']['id'])); ?>
+		<div class="title"><?php echo $this->Html->link($this->Text->truncate($course['Course']['title'],25),array('action'=>'view',$course['Course']['id'])); ?>
 		</div>
-		<div class="description"><?php echo $this->Text->truncate($course['Course']['description'],80); ?>
+		<div class="description"><?php echo $this->Text->truncate($course['Course']['description'],115); ?>
 		</div>
 		<div class="cost">Cost: $<?php echo $course['Course']['cost']; ?>
 		</div>
