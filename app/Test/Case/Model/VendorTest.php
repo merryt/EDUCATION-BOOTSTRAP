@@ -15,9 +15,10 @@ class VendorTest extends CakeTestCase {
 	public $fixtures = array(
 		'app.vendor',
 		'app.course',
-		'app.courseequivalent',
+		'app.level',
+		'app.facilitation',
 		'app.subject',
-		'app.courseequivalents_subject'
+		'app.courses_subject'
 	);
 
 /**

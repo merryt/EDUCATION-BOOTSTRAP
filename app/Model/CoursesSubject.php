@@ -1,12 +1,12 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Courseequivalent Model
+ * CoursesSubject Model
  *
- * @property Course $Course
  * @property Subject $Subject
+ * @property Course $Course
  */
-class Courseequivalent extends AppModel {
+class CoursesSubject extends AppModel {
 
 /**
  * Validation rules
@@ -14,9 +14,9 @@ class Courseequivalent extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'name' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+		'subject_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -44,6 +44,13 @@ class Courseequivalent extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
+		'Subject' => array(
+			'className' => 'Subject',
+			'foreignKey' => 'subject_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'Course' => array(
 			'className' => 'Course',
 			'foreignKey' => 'course_id',
@@ -52,28 +59,4 @@ class Courseequivalent extends AppModel {
 			'order' => ''
 		)
 	);
-
-/**
- * hasAndBelongsToMany associations
- *
- * @var array
- */
-	public $hasAndBelongsToMany = array(
-		'Subject' => array(
-			'className' => 'Subject',
-			'joinTable' => 'courseequivalents_subjects',
-			'foreignKey' => 'courseequivalent_id',
-			'associationForeignKey' => 'subject_id',
-			'unique' => 'keepExisting',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => ''
-		)
-	);
-
 }

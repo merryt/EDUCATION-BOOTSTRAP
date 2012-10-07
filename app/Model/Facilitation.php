@@ -1,11 +1,11 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Subject Model
+ * Facilitation Model
  *
  * @property Course $Course
  */
-class Subject extends AppModel {
+class Facilitation extends AppModel {
 
 /**
  * Validation rules
@@ -28,25 +28,23 @@ class Subject extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
- * hasAndBelongsToMany associations
+ * hasMany associations
  *
  * @var array
  */
-	public $hasAndBelongsToMany = array(
+	public $hasMany = array(
 		'Course' => array(
 			'className' => 'Course',
-			'joinTable' => 'courses_subjects',
-			'foreignKey' => 'subject_id',
-			'associationForeignKey' => 'course_id',
-			'unique' => 'keepExisting',
+			'foreignKey' => 'facilitation_id',
+			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
+			'exclusive' => '',
 			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => ''
+			'counterQuery' => ''
 		)
 	);
 

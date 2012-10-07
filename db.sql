@@ -31,66 +31,92 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `edubootstrap`.`facilitations`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `edubootstrap`.`facilitations` ;
+
+CREATE  TABLE IF NOT EXISTS `edubootstrap`.`facilitations` (
+  `id` INT NOT NULL ,
+  `name` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `edubootstrap`.`levels`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `edubootstrap`.`levels` ;
+
+CREATE  TABLE IF NOT EXISTS `edubootstrap`.`levels` (
+  `id` INT NOT NULL ,
+  `name` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `edubootstrap`.`courses`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `edubootstrap`.`courses` ;
 
 CREATE  TABLE IF NOT EXISTS `edubootstrap`.`courses` (
   `id` INT NOT NULL ,
-  `name` VARCHAR(45) NOT NULL ,
-  `cost` INT NULL DEFAULT 0 ,
+  `title` VARCHAR(255) NOT NULL ,
+  `description` TEXT NOT NULL ,
   `vendor_id` INT NOT NULL ,
-  `description` VARCHAR(255) NOT NULL ,
+  `cost` INT NULL DEFAULT 0 ,
   `duration` INT NULL DEFAULT 0 ,
+  `level_id` INT NOT NULL ,
+  `rating` INT NULL DEFAULT 0 ,
+  `author` VARCHAR(45) NULL ,
+  `likes` INT NULL ,
+  `facilitation_id` INT NOT NULL ,
+  `includes` TEXT NULL ,
+  `released` DATETIME NULL ,
+  `courseurl` VARCHAR(400) NOT NULL ,
+  `imageurl` VARCHAR(400) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `courses_vendors` (`vendor_id` ASC) ,
+  INDEX `courses_facilitations` (`facilitation_id` ASC) ,
+  INDEX `courses_levels` (`level_id` ASC) ,
   CONSTRAINT `courses_vendors`
     FOREIGN KEY (`vendor_id` )
     REFERENCES `edubootstrap`.`vendors` (`id` )
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `courses_facilitations`
+    FOREIGN KEY (`facilitation_id` )
+    REFERENCES `edubootstrap`.`facilitations` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `courses_levels`
+    FOREIGN KEY (`level_id` )
+    REFERENCES `edubootstrap`.`levels` (`id` )
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `edubootstrap`.`courseequivalents`
+-- Table `edubootstrap`.`courses_subjects`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `edubootstrap`.`courseequivalents` ;
+DROP TABLE IF EXISTS `edubootstrap`.`courses_subjects` ;
 
-CREATE  TABLE IF NOT EXISTS `edubootstrap`.`courseequivalents` (
+CREATE  TABLE IF NOT EXISTS `edubootstrap`.`courses_subjects` (
   `id` INT NOT NULL ,
-  `name` VARCHAR(45) NOT NULL ,
+  `subject_id` INT NOT NULL ,
   `course_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `course_equivalents_courses` (`course_id` ASC) ,
-  CONSTRAINT `course_equivalents_courses`
+  INDEX `fk_courses_subjects_courses` (`course_id` ASC) ,
+  INDEX `fk_courses_subjects_subjects` (`subject_id` ASC) ,
+  CONSTRAINT `fk_courses_subjects_courses`
     FOREIGN KEY (`course_id` )
     REFERENCES `edubootstrap`.`courses` (`id` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `edubootstrap`.`courseequivalents_subjects`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `edubootstrap`.`courseequivalents_subjects` ;
-
-CREATE  TABLE IF NOT EXISTS `edubootstrap`.`courseequivalents_subjects` (
-  `id` INT NOT NULL ,
-  `subject_id` INT NOT NULL ,
-  `courseequivalent_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `courseequivalents_subjects_subjects` (`subject_id` ASC) ,
-  INDEX `courseequivalents_subjects_courseequivalents` (`courseequivalent_id` ASC) ,
-  CONSTRAINT `courseequivalents_subjects_subjects`
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_courses_subjects_subjects`
     FOREIGN KEY (`subject_id` )
     REFERENCES `edubootstrap`.`subjects` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `courseequivalents_subjects_courseequivalents`
-    FOREIGN KEY (`courseequivalent_id` )
-    REFERENCES `edubootstrap`.`courseequivalents` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -106,8 +132,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `edubootstrap`;
-INSERT INTO `edubootstrap`.`subjects` (`id`, `name`) VALUES (1, 'Computer Science');
+INSERT INTO `edubootstrap`.`subjects` (`id`, `name`) VALUES (1, 'Mobile App Development');
 INSERT INTO `edubootstrap`.`subjects` (`id`, `name`) VALUES (2, 'Western Art History');
+INSERT INTO `edubootstrap`.`subjects` (`id`, `name`) VALUES (3, 'Geology');
+INSERT INTO `edubootstrap`.`subjects` (`id`, `name`) VALUES (4, 'Auto Repair');
 
 COMMIT;
 
@@ -122,37 +150,32 @@ INSERT INTO `edubootstrap`.`vendors` (`id`, `name`) VALUES (2, 'Udemy');
 COMMIT;
 
 -- -----------------------------------------------------
+-- Data for table `edubootstrap`.`facilitations`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `edubootstrap`;
+INSERT INTO `edubootstrap`.`facilitations` (`id`, `name`) VALUES (1, 'self-paced');
+INSERT INTO `edubootstrap`.`facilitations` (`id`, `name`) VALUES (2, 'instructor-led');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `edubootstrap`.`levels`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `edubootstrap`;
+INSERT INTO `edubootstrap`.`levels` (`id`, `name`) VALUES (1, 'Beginner');
+INSERT INTO `edubootstrap`.`levels` (`id`, `name`) VALUES (2, 'Intermediate');
+INSERT INTO `edubootstrap`.`levels` (`id`, `name`) VALUES (3, 'Advanced');
+
+COMMIT;
+
+-- -----------------------------------------------------
 -- Data for table `edubootstrap`.`courses`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `edubootstrap`;
-INSERT INTO `edubootstrap`.`courses` (`id`, `name`, `cost`, `vendor_id`, `description`, `duration`) VALUES (1, 'CSCI 101', 0, 1, 'description here', NULL);
-INSERT INTO `edubootstrap`.`courses` (`id`, `name`, `cost`, `vendor_id`, `description`, `duration`) VALUES (2, 'CSCI 102', 0, 1, 'description here', NULL);
-INSERT INTO `edubootstrap`.`courses` (`id`, `name`, `cost`, `vendor_id`, `description`, `duration`) VALUES (3, 'AHIST 101 - Western', 100, 2, 'description here', NULL);
-INSERT INTO `edubootstrap`.`courses` (`id`, `name`, `cost`, `vendor_id`, `description`, `duration`) VALUES (4, 'AHIST 102 - Eastern', 100, 2, 'description here', NULL);
-
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table `edubootstrap`.`courseequivalents`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `edubootstrap`;
-INSERT INTO `edubootstrap`.`courseequivalents` (`id`, `name`, `course_id`) VALUES (1, 'Art History 101', 1);
-INSERT INTO `edubootstrap`.`courseequivalents` (`id`, `name`, `course_id`) VALUES (2, 'Art History 102', 2);
-INSERT INTO `edubootstrap`.`courseequivalents` (`id`, `name`, `course_id`) VALUES (3, 'CSCI 101', 3);
-INSERT INTO `edubootstrap`.`courseequivalents` (`id`, `name`, `course_id`) VALUES (4, 'CSCI 102', 4);
-
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table `edubootstrap`.`courseequivalents_subjects`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `edubootstrap`;
-INSERT INTO `edubootstrap`.`courseequivalents_subjects` (`id`, `subject_id`, `courseequivalent_id`) VALUES (1, 1, 3);
-INSERT INTO `edubootstrap`.`courseequivalents_subjects` (`id`, `subject_id`, `courseequivalent_id`) VALUES (2, 1, 4);
-INSERT INTO `edubootstrap`.`courseequivalents_subjects` (`id`, `subject_id`, `courseequivalent_id`) VALUES (3, 2, 1);
-INSERT INTO `edubootstrap`.`courseequivalents_subjects` (`id`, `subject_id`, `courseequivalent_id`) VALUES (4, 2, 2);
+INSERT INTO `edubootstrap`.`courses` (`id`, `title`, `description`, `vendor_id`, `cost`, `duration`, `level_id`, `rating`, `author`, `likes`, `facilitation_id`, `includes`, `released`, `courseurl`, `imageurl`) VALUES (1, 'Titanium Mobile App Development Essential Training', 'In this course, author Rafael Hernandez creates native iOS and Android applications from a single codebase with the open-source Appcelerator Titanium platform. The course explains the difference between browser-based JavaScript and Titanium JavaScript, shows how to create a basic application, and demonstrates building buttons, sliders, switches, and pickers. The course also covers creating tables, implementing maps, providing feedback to users, incorporating multimedia, detecting gestures, and preparing finished apps for distribution.', 1, 25, 640, 1, 0, 'Rafael Hernandez', 22, 1, '{exercises:true,\n					audio:true,\n					captions:true,\n					discussionForum:false,\n					video:true}', '2012', 'http://www.lynda.com/Titanium-training/Mobile-App-Development-Essential-Training/89116-2.html?srchtrk=index%3A1%0Alinktypeid%3A2%0Aq%3Amobile%20app%20development%0Apage%3A1%0As%3Arelevance%0Asa%3Atrue%0Aproducttypeid%3A2%0Ameta_topic_facet%3AMobile%20Apps%0Alevel%3A1-Beginner', NULL);
+INSERT INTO `edubootstrap`.`courses` (`id`, `title`, `description`, `vendor_id`, `cost`, `duration`, `level_id`, `rating`, `author`, `likes`, `facilitation_id`, `includes`, `released`, `courseurl`, `imageurl`) VALUES (2, 'Android App Development with Java Essential Training', 'This course is a comprehensive look at the Android architecture that teaches how to build and deploy applications for Android phones and tablets using the Java programming language. Starting with the installation of the required developer tools, including Eclipse and the Android SDK, the course covers how to build the user interface, work with local data, integrate data from the accelerometer and other sensors, and deploy finished applications to the Android Market.', 1, 149, 433, 1, 0, 'Lee Brimelow', 291, 1, '{\"exercises\":true,\"audio\":true,\"captions\":true,\"discussionForum\":false,\"video\":true}', '2011', 'http://www.lynda.com/Android-2-tutorials/Android-App-Development-with-Java-Essential-Training/79825-2.html?srchtrk=index%3A5%0Alinktypeid%3A2%0Aq%3Amobile%20app%20development%0Apage%3A1%0As%3Arelevance%0Asa%3Atrue%0Aproducttypeid%3A2%0Ameta_topic_facet%3AMobile%20Apps%0Alevel%3A1-Beginner', NULL);
 
 COMMIT;

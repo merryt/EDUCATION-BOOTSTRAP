@@ -4,7 +4,9 @@ App::uses('AppModel', 'Model');
  * Course Model
  *
  * @property Vendor $Vendor
- * @property Courseequivalent $Courseequivalent
+ * @property Level $Level
+ * @property Facilitation $Facilitation
+ * @property Subject $Subject
  */
 class Course extends AppModel {
 
@@ -14,7 +16,17 @@ class Course extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'name' => array(
+		'title' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'description' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -34,7 +46,27 @@ class Course extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'description' => array(
+		'level_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'facilitation_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'courseurl' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -60,27 +92,43 @@ class Course extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Level' => array(
+			'className' => 'Level',
+			'foreignKey' => 'level_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Facilitation' => array(
+			'className' => 'Facilitation',
+			'foreignKey' => 'facilitation_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 
 /**
- * hasMany associations
+ * hasAndBelongsToMany associations
  *
  * @var array
  */
-	public $hasMany = array(
-		'Courseequivalent' => array(
-			'className' => 'Courseequivalent',
+	public $hasAndBelongsToMany = array(
+		'Subject' => array(
+			'className' => 'Subject',
+			'joinTable' => 'courses_subjects',
 			'foreignKey' => 'course_id',
-			'dependent' => false,
+			'associationForeignKey' => 'subject_id',
+			'unique' => 'keepExisting',
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
-			'exclusive' => '',
 			'finderQuery' => '',
-			'counterQuery' => ''
+			'deleteQuery' => '',
+			'insertQuery' => ''
 		)
 	);
 

@@ -48,7 +48,10 @@ class CoursesController extends AppController {
 			}
 		}
 		$vendors = $this->Course->Vendor->find('list');
-		$this->set(compact('vendors'));
+		$levels = $this->Course->Level->find('list');
+		$facilitations = $this->Course->Facilitation->find('list');
+		$subjects = $this->Course->Subject->find('list');
+		$this->set(compact('vendors', 'levels', 'facilitations', 'subjects'));
 	}
 
 /**
@@ -74,7 +77,10 @@ class CoursesController extends AppController {
 			$this->request->data = $this->Course->read(null, $id);
 		}
 		$vendors = $this->Course->Vendor->find('list');
-		$this->set(compact('vendors'));
+		$levels = $this->Course->Level->find('list');
+		$facilitations = $this->Course->Facilitation->find('list');
+		$subjects = $this->Course->Subject->find('list');
+		$this->set(compact('vendors', 'levels', 'facilitations', 'subjects'));
 	}
 
 /**

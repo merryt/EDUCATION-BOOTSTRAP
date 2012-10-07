@@ -47,8 +47,8 @@ class SubjectsController extends AppController {
 				$this->Session->setFlash(__('The subject could not be saved. Please, try again.'));
 			}
 		}
-		$courseequivalents = $this->Subject->Courseequivalent->find('list');
-		$this->set(compact('courseequivalents'));
+		$courses = $this->Subject->Course->find('list');
+		$this->set(compact('courses'));
 	}
 
 /**
@@ -73,8 +73,8 @@ class SubjectsController extends AppController {
 		} else {
 			$this->request->data = $this->Subject->read(null, $id);
 		}
-		$courseequivalents = $this->Subject->Courseequivalent->find('list');
-		$this->set(compact('courseequivalents'));
+		$courses = $this->Subject->Course->find('list');
+		$this->set(compact('courses'));
 	}
 
 /**

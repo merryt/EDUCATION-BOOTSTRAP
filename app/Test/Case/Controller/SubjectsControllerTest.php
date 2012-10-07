@@ -14,10 +14,11 @@ class SubjectsControllerTest extends ControllerTestCase {
  */
 	public $fixtures = array(
 		'app.subject',
-		'app.courseequivalent',
 		'app.course',
 		'app.vendor',
-		'app.courseequivalents_subject'
+		'app.level',
+		'app.facilitation',
+		'app.courses_subject'
 	);
 
 /**

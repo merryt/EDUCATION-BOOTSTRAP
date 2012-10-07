@@ -1,14 +1,14 @@
-<div class="vendors view">
-<h2><?php  echo __('Vendor'); ?></h2>
+<div class="facilitations view">
+<h2><?php  echo __('Facilitation'); ?></h2>
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>
-			<?php echo h($vendor['Vendor']['id']); ?>
+			<?php echo h($facilitation['Facilitation']['id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Name'); ?></dt>
 		<dd>
-			<?php echo h($vendor['Vendor']['name']); ?>
+			<?php echo h($facilitation['Facilitation']['name']); ?>
 			&nbsp;
 		</dd>
 	</dl>
@@ -16,17 +16,17 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Vendor'), array('action' => 'edit', $vendor['Vendor']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Vendor'), array('action' => 'delete', $vendor['Vendor']['id']), null, __('Are you sure you want to delete # %s?', $vendor['Vendor']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Vendors'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Vendor'), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit Facilitation'), array('action' => 'edit', $facilitation['Facilitation']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete Facilitation'), array('action' => 'delete', $facilitation['Facilitation']['id']), null, __('Are you sure you want to delete # %s?', $facilitation['Facilitation']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('List Facilitations'), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Facilitation'), array('action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Courses'), array('controller' => 'courses', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Course'), array('controller' => 'courses', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
 <div class="related">
 	<h3><?php echo __('Related Courses'); ?></h3>
-	<?php if (!empty($vendor['Course'])): ?>
+	<?php if (!empty($facilitation['Course'])): ?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php echo __('Id'); ?></th>
@@ -48,7 +48,7 @@
 	</tr>
 	<?php
 		$i = 0;
-		foreach ($vendor['Course'] as $course): ?>
+		foreach ($facilitation['Course'] as $course): ?>
 		<tr>
 			<td><?php echo $course['id']; ?></td>
 			<td><?php echo $course['title']; ?></td>

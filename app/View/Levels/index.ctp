@@ -1,5 +1,5 @@
-<div class="subjects index">
-	<h2><?php echo __('Subjects'); ?></h2>
+<div class="levels index">
+	<h2><?php echo __('Levels'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -7,14 +7,14 @@
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php
-	foreach ($subjects as $subject): ?>
+	foreach ($levels as $level): ?>
 	<tr>
-		<td><?php echo h($subject['Subject']['id']); ?>&nbsp;</td>
-		<td><?php echo h($subject['Subject']['name']); ?>&nbsp;</td>
+		<td><?php echo h($level['Level']['id']); ?>&nbsp;</td>
+		<td><?php echo h($level['Level']['name']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $subject['Subject']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $subject['Subject']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $subject['Subject']['id']), null, __('Are you sure you want to delete # %s?', $subject['Subject']['id'])); ?>
+			<?php echo $this->Html->link(__('View'), array('action' => 'view', $level['Level']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $level['Level']['id'])); ?>
+			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $level['Level']['id']), null, __('Are you sure you want to delete # %s?', $level['Level']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -37,7 +37,7 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Subject'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('New Level'), array('action' => 'add')); ?></li>
 		<li><?php echo $this->Html->link(__('List Courses'), array('controller' => 'courses', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Course'), array('controller' => 'courses', 'action' => 'add')); ?> </li>
 	</ul>
