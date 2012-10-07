@@ -31,6 +31,10 @@ body{
  height: 83px;
  padding: 4px;
 }
+.description2 {
+ height: 55px;
+ padding: 4px;
+}
 .cost, .duration{
  padding: 2px 4px;
 }
@@ -101,8 +105,15 @@ body{
 		width: 300px;
 	}
 
+#search2{
+	margin: 0 0 0 10px;	
+}
 #logo{
 	margin: 0 0 0 -12px;
+}
+#pic2{
+	float: right;
+	margin: 70px 90px 0 0;
 }
 #centerImg{
 	margin: -12px auto 0 auto;
