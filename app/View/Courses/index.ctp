@@ -98,12 +98,12 @@ body{
 		<div class="loginBox">
 			<a href="#">SIGN-IN</a> - <a href="#">CREATE ACCOUNT</a>
 			<br />
-			<a><img src="img/browse.png" /></a>
+			<?php echo $this->Html->link($this->Html->image('browse.png'), array('action' => 'search'),array('escape'=>false));?>
 		</div>
 	</div>
 	<div class="gray">
 		<div class="wrap">
-		<img id="centerImg" src="img/centerImg.jpg" />
+			<?php echo $this->Html->image('centerImg.jpg');?>
 		</div>
 	</div>
 	<div class="wrap">
