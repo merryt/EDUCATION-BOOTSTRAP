@@ -25,11 +25,11 @@ body{
 	text-transform: uppercase;
 }
 .description {
- height: 118px;
- padding: 3px;
+ height: 54px;
+ padding: 4px;
 }
-.cost {
- padding: 3px;
+.cost, .duration{
+ padding: 2px 4px;
 }
 .course{
 	background-image: url('../img/courseBox.jpg') ;
@@ -92,5 +92,11 @@ body{
 }
 #browse{
 	width: 960px;
+	height: 80px;
 	clear: both;
+	margin: 10px 400px;
+}
+
+#browse span{
+	margin: 4px;
 }
