@@ -6,7 +6,7 @@
 	foreach ($courses as $course) { ?>
 	<div class="course">
 		<div class="image">
-			<img src="img/thumbnails/android1.png" /><?php //echo h($course['Course']['imageurl']); ?>
+			<?php echo $this->Html->image($course['Course']['imageurl'],array()); ?>
 		</div>
 		<div class="title"><?php echo $this->Html->link($course['Course']['title'],array('action'=>'view',$course['Course']['id'])); ?>
 		</div>
