@@ -26,9 +26,9 @@
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
-		//echo $this->Html->css('bootstrap');
-		//echo $this->Html->css('bootstrap-responsive');
+		//echo $this->Html->css('cake.generic');
+		echo $this->Html->css('bootstrap');
+		echo $this->Html->css('bootstrap-responsive');
 		echo $this->Html->css('edubootstrap');
 		echo $this->Html->script('bootstrap');
 

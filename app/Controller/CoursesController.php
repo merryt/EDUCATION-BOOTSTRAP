@@ -7,6 +7,11 @@ App::uses('AppController', 'Controller');
  */
 class CoursesController extends AppController {
 
+	public $paginate = array(
+		'limit' => 2					// Default paging info
+		,'paramType' => 'querystring'
+	);
+
 /**
  * index method
  *

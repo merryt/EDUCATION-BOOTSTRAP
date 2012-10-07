@@ -122,6 +122,64 @@ CREATE  TABLE IF NOT EXISTS `edubootstrap`.`courses_subjects` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `edubootstrap`.`users`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `edubootstrap`.`users` ;
+
+CREATE  TABLE IF NOT EXISTS `edubootstrap`.`users` (
+  `id` INT NOT NULL ,
+  `username` VARCHAR(45) NOT NULL ,
+  `firstname` VARCHAR(45) NULL ,
+  `lastname` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `edubootstrap`.`statuses`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `edubootstrap`.`statuses` ;
+
+CREATE  TABLE IF NOT EXISTS `edubootstrap`.`statuses` (
+  `id` INT NOT NULL ,
+  `name` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `edubootstrap`.`courses_users`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `edubootstrap`.`courses_users` ;
+
+CREATE  TABLE IF NOT EXISTS `edubootstrap`.`courses_users` (
+  `id` INT NOT NULL ,
+  `course_id` INT NOT NULL ,
+  `user_id` INT NOT NULL ,
+  `status_id` INT NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_courses_uses_courses` (`course_id` ASC) ,
+  INDEX `fk_courses_users_users` (`user_id` ASC) ,
+  INDEX `fk_courses_users_statuses` (`status_id` ASC) ,
+  CONSTRAINT `fk_courses_uses_courses`
+    FOREIGN KEY (`course_id` )
+    REFERENCES `edubootstrap`.`courses` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_courses_users_users`
+    FOREIGN KEY (`user_id` )
+    REFERENCES `edubootstrap`.`users` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_courses_users_statuses`
+    FOREIGN KEY (`status_id` )
+    REFERENCES `edubootstrap`.`statuses` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -177,5 +235,38 @@ START TRANSACTION;
 USE `edubootstrap`;
 INSERT INTO `edubootstrap`.`courses` (`id`, `title`, `description`, `vendor_id`, `cost`, `duration`, `level_id`, `rating`, `author`, `likes`, `facilitation_id`, `includes`, `released`, `courseurl`, `imageurl`) VALUES (1, 'Titanium Mobile App Development Essential Training', 'In this course, author Rafael Hernandez creates native iOS and Android applications from a single codebase with the open-source Appcelerator Titanium platform. The course explains the difference between browser-based JavaScript and Titanium JavaScript, shows how to create a basic application, and demonstrates building buttons, sliders, switches, and pickers. The course also covers creating tables, implementing maps, providing feedback to users, incorporating multimedia, detecting gestures, and preparing finished apps for distribution.', 1, 25, 640, 1, 0, 'Rafael Hernandez', 22, 1, '{exercises:true,\n					audio:true,\n					captions:true,\n					discussionForum:false,\n					video:true}', '2012', 'http://www.lynda.com/Titanium-training/Mobile-App-Development-Essential-Training/89116-2.html?srchtrk=index%3A1%0Alinktypeid%3A2%0Aq%3Amobile%20app%20development%0Apage%3A1%0As%3Arelevance%0Asa%3Atrue%0Aproducttypeid%3A2%0Ameta_topic_facet%3AMobile%20Apps%0Alevel%3A1-Beginner', NULL);
 INSERT INTO `edubootstrap`.`courses` (`id`, `title`, `description`, `vendor_id`, `cost`, `duration`, `level_id`, `rating`, `author`, `likes`, `facilitation_id`, `includes`, `released`, `courseurl`, `imageurl`) VALUES (2, 'Android App Development with Java Essential Training', 'This course is a comprehensive look at the Android architecture that teaches how to build and deploy applications for Android phones and tablets using the Java programming language. Starting with the installation of the required developer tools, including Eclipse and the Android SDK, the course covers how to build the user interface, work with local data, integrate data from the accelerometer and other sensors, and deploy finished applications to the Android Market.', 1, 149, 433, 1, 0, 'Lee Brimelow', 291, 1, '{\"exercises\":true,\"audio\":true,\"captions\":true,\"discussionForum\":false,\"video\":true}', '2011', 'http://www.lynda.com/Android-2-tutorials/Android-App-Development-with-Java-Essential-Training/79825-2.html?srchtrk=index%3A5%0Alinktypeid%3A2%0Aq%3Amobile%20app%20development%0Apage%3A1%0As%3Arelevance%0Asa%3Atrue%0Aproducttypeid%3A2%0Ameta_topic_facet%3AMobile%20Apps%0Alevel%3A1-Beginner', NULL);
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `edubootstrap`.`users`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `edubootstrap`;
+INSERT INTO `edubootstrap`.`users` (`id`, `username`, `firstname`, `lastname`) VALUES (1, 'tmerry', 'Tyler', 'Merry');
+INSERT INTO `edubootstrap`.`users` (`id`, `username`, `firstname`, `lastname`) VALUES (2, 'turrechaga', 'Tiffany', 'Urréchega');
+INSERT INTO `edubootstrap`.`users` (`id`, `username`, `firstname`, `lastname`) VALUES (3, 'dhead', 'Doody', 'Head');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `edubootstrap`.`statuses`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `edubootstrap`;
+INSERT INTO `edubootstrap`.`statuses` (`id`, `name`) VALUES (1, 'Enrolled');
+INSERT INTO `edubootstrap`.`statuses` (`id`, `name`) VALUES (2, 'In Progress');
+INSERT INTO `edubootstrap`.`statuses` (`id`, `name`) VALUES (3, 'Complete');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `edubootstrap`.`courses_users`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `edubootstrap`;
+INSERT INTO `edubootstrap`.`courses_users` (`id`, `course_id`, `user_id`, `status_id`) VALUES (1, 1, 1, 1);
+INSERT INTO `edubootstrap`.`courses_users` (`id`, `course_id`, `user_id`, `status_id`) VALUES (2, 1, 2, 2);
+INSERT INTO `edubootstrap`.`courses_users` (`id`, `course_id`, `user_id`, `status_id`) VALUES (3, 3, 2, 3);
 
 COMMIT;
