@@ -29,7 +29,7 @@
 	<div class="courses index">
 		<div id="search2">
 			<form action="<?php echo Router::url(array('action'=>'search')); ?>" class="form-search">
-				<input type="text" class="input-medium search-query" name="data[keywords]">
+				<input type="text" class="input-medium search-query" name="keywords">
 				<button type="submit" class="btn btn-primary">Search</button>
 			</form>
 		</div>
