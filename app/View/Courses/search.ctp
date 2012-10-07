@@ -1,4 +1,12 @@
 <div class="courses index">
+
+	<div id="search">
+		<form action="<?php echo Router::url(array('action'=>'search')); ?>" class="form-search">
+			<input type="text" class="input-medium search-query" name="keywords">
+			<button type="submit" class="btn btn-primary">Search</button>
+		</form>
+	</div>
+
 	<h2><?php echo __('Search Results'); ?></h2>
 	<?php
 	foreach ($courses as $course){ ?>

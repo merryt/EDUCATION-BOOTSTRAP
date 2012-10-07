@@ -24,9 +24,10 @@ class CoursesController extends AppController {
 		if(isset($this->request->query['keywords'])) {
 			$conditions = array(
 				'OR' => array(
-				"Course.title like" => $this->request->query['keywords']
-				,"Course.description like" => $this->request->query['keywords']
-			));			
+					"Course.title like" => $this->request->query['keywords']
+					,"Course.description like" => $this->request->query['keywords']
+				)
+			);			
 		}
 	
 		if(isset($this->request->query['me'])) {
@@ -38,11 +39,19 @@ class CoursesController extends AppController {
 			,'modelpaths' => array('User','Vendor','Level')
 			,'conditions' => $conditions
 		);
+		$tc = $this->Course->find('all',$query);
+		$q = $this->getLastQuery($this->Course);
 		$this->paginate = array_merge($this->paginate,$query);
 		$courses = $this->paginate();
 		$this->set('courses', $courses);
 	}
-
+	protected function getLastQuery($model) {
+		$dbo = $model->getDatasource();
+		$logs = $dbo->getLog();
+		$lastLog = end($logs['log']);
+		return $lastLog['query'];
+	}
+	
 /**
  * index method
  *

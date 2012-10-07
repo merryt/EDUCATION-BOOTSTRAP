@@ -37,7 +37,7 @@
 			<?php echo $this->Html->image('centerImg.jpg');?>
 			<div id="search">
 				<form action="<?php echo Router::url(array('action'=>'search')); ?>" class="form-search">
-					<input type="text" class="input-medium search-query" name="data[keywords]">
+					<input type="text" class="input-medium search-query" name="keywords">
 					<button type="submit" class="btn btn-primary">Search</button>
 				</form>
 			</div>
